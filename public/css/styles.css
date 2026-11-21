@@ -540,6 +540,7 @@ img {
 .cta-band img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 21 / 8;
   object-fit: cover;
 }
