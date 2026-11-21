@@ -21,7 +21,12 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
@@ -130,6 +135,7 @@ img {
 /* Header */
 
 .site-header {
+  position: relative;
   background: var(--white);
   border-bottom: 1px solid var(--line);
 }
@@ -159,7 +165,13 @@ img {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--orange) 50%, var(--ink) 50%, var(--ink) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--orange) 0%,
+    var(--orange) 50%,
+    var(--ink) 50%,
+    var(--ink) 100%
+  );
 }
 
 .nav-links {
@@ -178,7 +190,7 @@ img {
 }
 
 .nav-links a:hover,
-.nav-links a[aria-current='page'] {
+.nav-links a[aria-current="page"] {
   color: var(--orange-dark);
 }
 
@@ -193,7 +205,13 @@ img {
 }
 
 .site-header--home .logo-mark {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--orange) 50%, var(--white) 50%, var(--white) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--orange) 0%,
+    var(--orange) 50%,
+    var(--white) 50%,
+    var(--white) 100%
+  );
 }
 
 .site-header--home .container {
@@ -226,6 +244,47 @@ img {
 .site-header--home .nav-links .btn {
   margin-left: 12px;
   padding: 10px 20px;
+}
+
+/* Burger toggle: hidden on desktop, shown in the 768px media query */
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.site-header--home .nav-toggle {
+  color: var(--white);
+}
+
+.nav-toggle-bar {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Turn the three bars into an X when open */
+.nav-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Home hero */
@@ -339,7 +398,7 @@ img {
 }
 
 .check-list li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 6px;
@@ -458,7 +517,7 @@ img {
 }
 
 .icon-dot::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 13px;
   border-radius: 50%;
@@ -746,6 +805,46 @@ img {
   padding-top: 24px;
 }
 
+@media (max-width: 1024px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+  }
+
+  .hero-media {
+    width: 100%;
+  }
+
+  .hero-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 955px) {
+  .site-header--home .nav-links a {
+    padding: 0px;
+  }
+
+  .site-header--home .logo {
+    margin: 16px 0px;
+  }
+
+  .site-header .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px 16px;
+  }
+
+  .site-header .container {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 40px;
@@ -753,6 +852,10 @@ img {
 
   h2 {
     font-size: 30px;
+  }
+
+  .container {
+    margin: 0 32px;
   }
 
   .section {
@@ -781,6 +884,76 @@ img {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .hero-inner {
+    flex-direction: column-reverse;
+  }
+
+  .playbook-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .hero-media {
+    width: 100vw;
+  }
+
+  .hero-image {
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  /* Burger menu. `.site-header` selectors match the specificity of the
+     `.site-header--home` rules above and win because they come later. */
+
+  /* Undo the stacked tablet header from the 955px query: logo left, burger right */
+  .site-header .container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .site-header--home .logo {
+    margin: 0;
+  }
+
+  .site-header.nav-ready .nav-toggle {
+    display: flex;
+  }
+
+  .site-header.nav-ready .nav-links {
+    display: none;
+  }
+
+  .site-header.nav-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 8px 0 16px;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header--home.nav-open .nav-links {
+    background: var(--ink);
+    border-bottom: 0;
+  }
+
+  .site-header .nav-links a {
+    display: block;
+    padding: 12px 56px; /* lines up with the logo (32px margin + 24px padding) */
+  }
+
+  .site-header .nav-links .btn {
+    display: inline-block;
+    margin: 8px 56px 0;
+    padding: 10px 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -798,5 +971,10 @@ img {
 
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-actions{
+    align-items: center;
+    justify-content: center;
   }
 }
