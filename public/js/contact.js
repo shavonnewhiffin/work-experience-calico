@@ -1,8 +1,14 @@
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
+const honeypot = document.getElementById('honeypot');
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+
+  if (honeypot.value) {
+    // If the honeypot field is filled, it's a bot submission. Do nothing.
+    return;
+  }
 
   const button = form.querySelector('button[type="submit"]');
   button.disabled = true;

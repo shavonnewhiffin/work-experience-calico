@@ -10,13 +10,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'] }));
 
 app.post('/contact', (req, res) => {
+  const honeypot = (req.body.company || '').trim();
   const name = (req.body.name || '').trim();
   const email = (req.body.email || '').trim();
   const message = (req.body.message || '').trim();
+  
+  if(honeypot){
+    res.json({ ok: true })
+    return
+  }
 
   if (!name || !email || !message) {
     return res.status(400).json({ ok: false, error: 'Please fill in your name, email and message.' });
   }
+
 
   sendToSupport({ name, email, message });
   res.json({ ok: true });
