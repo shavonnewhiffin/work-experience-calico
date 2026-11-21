@@ -2,6 +2,9 @@ const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 const honeypot = document.getElementById('honeypot');
 
+// Runs once, when the page loads: remember the time in milliseconds.
+const pageLoadedAt = Date.now();
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -16,6 +19,10 @@ form.addEventListener('submit', async (event) => {
   statusEl.className = 'form-status';
 
   const data = Object.fromEntries(new FormData(form));
+
+  // How long the visitor spent on the page before submitting.
+  // Worked out here so both times come from the same (browser) clock.
+  data.elapsed = Date.now() - pageLoadedAt;
 
   try {
     const response = await fetch('/contact', {

@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { sendToSupport } = require('./support');
+const startTime = Date.now();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,10 +15,17 @@ app.post('/contact', (req, res) => {
   const name = (req.body.name || '').trim();
   const email = (req.body.email || '').trim();
   const message = (req.body.message || '').trim();
-  
+  const elapsed = Number(req.body.elapsed);
+
   if(honeypot){
     res.json({ ok: true })
     return
+  }
+
+  // Too fast to be a person, or no timing (a bot). Pretend it worked, but don't email support.
+  if (Number.isNaN(elapsed) || elapsed < 3000) {
+    console.log(`[contact] dropped: submitted after ${req.body.elapsed ?? 'unknown'} ms`);
+    return res.json({ ok: true });
   }
 
   if (!name || !email || !message) {
@@ -26,7 +34,7 @@ app.post('/contact', (req, res) => {
 
 
   sendToSupport({ name, email, message });
-  res.json({ ok: true });
+  res.json({ ok: true })
 });
 
 app.listen(PORT, () => {
