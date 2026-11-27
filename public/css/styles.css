@@ -486,7 +486,7 @@ img {
 
 .playbook-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 28px;
 }
 
@@ -877,9 +877,6 @@ img {
     font-size: 30px;
   }
 
-  .container {
-    margin: 0 32px;
-  }
 
   .section {
     padding: 64px 0;
@@ -912,9 +909,6 @@ img {
     flex-direction: column-reverse;
   }
 
-  .playbook-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
 
   .hero-media {
     width: 100%;
