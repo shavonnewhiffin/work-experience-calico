@@ -19,6 +19,24 @@
   box-sizing: border-box;
 }
 
+/* Regular (400) */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Prevents invisible text while loading */
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
   font-family:
@@ -323,6 +341,7 @@ img {
 
 .hero-image {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius);
@@ -456,6 +475,8 @@ img {
 .feature-media img {
   display: block;
   width: 100%;
+  max-width: 1200px;
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius);
@@ -465,7 +486,7 @@ img {
 
 .playbook-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 28px;
 }
 
@@ -487,6 +508,7 @@ img {
 .card img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
 }
@@ -536,6 +558,7 @@ img {
 .cta-band img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 21 / 8;
   object-fit: cover;
 }
@@ -854,9 +877,6 @@ img {
     font-size: 30px;
   }
 
-  .container {
-    margin: 0 32px;
-  }
 
   .section {
     padding: 64px 0;
@@ -889,12 +909,9 @@ img {
     flex-direction: column-reverse;
   }
 
-  .playbook-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
 
   .hero-media {
-    width: 100vw;
+    width: 100%;
   }
 
   .hero-image {
