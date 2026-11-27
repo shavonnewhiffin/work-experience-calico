@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { sendToSupport } = require('./support');
-const startTime = Date.now();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
