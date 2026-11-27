@@ -10,6 +10,8 @@ form.addEventListener('submit', async (event) => {
 
   if (honeypot.value) {
     // If the honeypot field is filled, it's a bot submission. Do nothing.
+    statusEl.textContent = "Thanks, we'll be in touch within one business day.";
+    statusEl.classList.add('form-status--success');
     return;
   }
 
